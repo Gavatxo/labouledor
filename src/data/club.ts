@@ -134,10 +134,14 @@ export const VALUES = [
 
 export type Member = { initials: string; name: string; role: string };
 export const BUREAU: Member[] = [
-  { initials: "?", name: "À compléter", role: "Président" },
-  { initials: "?", name: "À compléter", role: "Trésorier" },
-  { initials: "?", name: "À compléter", role: "Secrétaire" },
-  { initials: "?", name: "À compléter", role: "Responsable concours" },
+  { initials: "CV", name: "Corentin Villoing", role: "Président" },
+  { initials: "MD", name: "Maxence Degrelle", role: "Vice-président" },
+  { initials: "DB", name: "Dorine Bordeau", role: "Trésorière" },
+  { initials: "LB", name: "Léonie Boursin", role: "Secrétaire" },
+  { initials: "CG", name: "Clément Gonthier", role: "Secrétaire adjoint" },
+  { initials: "AV", name: "Alexis Vogel", role: "Responsable sportif" },
+  { initials: "BB", name: "Bastien Boursin", role: "Responsable communication" },
+  { initials: "RD", name: "Rachelle Douget", role: "Restauration & buvette" },
 ];
 
 export const PARTNERS = [
