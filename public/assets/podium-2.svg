@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#221e18"/><stop offset="1" stop-color="#14120f"/>
+    </linearGradient>
+    <radialGradient id="boule" cx="0.35" cy="0.35" r="0.75">
+      <stop offset="0" stop-color="#efd08a"/><stop offset="0.55" stop-color="#d4a437"/><stop offset="1" stop-color="#a9761f"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.6">
+      <stop offset="0" stop-color="#d4a437" stop-opacity="0.22"/><stop offset="1" stop-color="#d4a437" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <circle cx="646" cy="449" r="194" fill="url(#boule)" opacity="0.20"/><circle cx="599" cy="843" r="151" fill="url(#boule)" opacity="0.15"/><circle cx="1124" cy="402" r="146" fill="url(#boule)" opacity="0.14"/><circle cx="536" cy="350" r="195" fill="url(#boule)" opacity="0.18"/><circle cx="467" cy="654" r="140" fill="url(#boule)" opacity="0.22"/><circle cx="871" cy="1005" r="134" fill="url(#boule)" opacity="0.20"/><circle cx="1340" cy="891" r="172" fill="url(#boule)" opacity="0.12"/>
+  <rect width="1600" height="1200" fill="url(#glow)"/>
+  <g transform="translate(800,560)">
+    <circle cx="0" cy="0" r="118" fill="url(#boule)"/>
+    <circle cx="150" cy="70" r="34" fill="#f6ecd9" opacity="0.9"/>
+    <circle cx="-42" cy="-40" r="30" fill="#fff" opacity="0.28"/>
+  </g>
+  <text x="800" y="768" text-anchor="middle" font-family="Georgia, serif" font-size="70" fill="#f6ecd9" opacity="0.96">Remise des prix</text>
+  <text x="800" y="838" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" letter-spacing="6" fill="#d4a437" opacity="0.85">PHOTO À VENIR · LA BOULE D’OR</text>
+</svg>

@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# La Boule d'Or Nibelloise — site du club
 
-## Getting Started
+Site vitrine du club de pétanque **La Boule d'Or Nibelloise** (Nibelle, Loiret).
+Construit avec **Next.js (App Router) + TypeScript**, fidèle à la maquette « Site La Boule d'Or ».
 
-First, run the development server:
+## Démarrer
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev      # serveur de développement → http://localhost:3000
+npm run build    # build de production
+npm run start    # sert le build de production
+npm run lint     # ESLint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Pages (V1)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Route            | Contenu                                                        |
+| ---------------- | ------------------------------------------------------------- |
+| `/`              | Accueil : hero, prochains concours, atouts, galerie, CTA      |
+| `/concours`      | Calendrier des concours avec filtres (à venir / passés / …)   |
+| `/resultats`     | Palmarès (podiums et scores)                                  |
+| `/club`          | Histoire, valeurs et bureau du club                           |
+| `/vie`           | Galerie photos avec filtres par catégorie                     |
+| `/nous-trouver`  | Carte (OpenStreetMap) + infos pratiques                       |
+| `/rejoindre`     | Étapes d'adhésion, tarif et formulaire de contact             |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Une modale d'inscription au concours (partagée) est accessible depuis les
+boutons « S'inscrire » du site.
 
-## Learn More
+## Modifier le contenu
 
-To learn more about Next.js, take a look at the following resources:
+**Tout le contenu éditorial est centralisé dans [`src/data/club.ts`](src/data/club.ts)** :
+concours, résultats, membres du bureau, valeurs, infos pratiques, partenaires…
+Éditez ce fichier pour mettre le site à jour, sans toucher au reste.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Remplacer les photos
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Les 3 visuels (`equipe`, `podium-1`, `podium-2`) sont des **placeholders** générés
+(`public/assets/*.svg`). Pour utiliser vos vraies photos :
 
-## Deploy on Vercel
+1. Déposez-les dans `public/assets/` (ex. `equipe.jpg`, `podium-1.jpg`, `podium-2.jpg`).
+2. Mettez à jour les chemins dans l'objet `IMAGES` de `src/data/club.ts`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Le logo (`public/assets/logo.svg`) est vectoriel et sert aussi de favicon
+(`src/app/icon.svg`).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## À venir (V2)
+
+- Résultats des championnats
+- Suivi des parties en direct (partie par partie)
+- Espace membres / gestion des inscriptions
+
+## Stack
+
+- Next.js 16 (App Router) · React 19 · TypeScript
+- Polices Caprasimo + Figtree via `next/font` (aucune requête externe au runtime)
+- Design system « Organic » (tokens gold / ink) porté en CSS variables dans `src/app/globals.css`
