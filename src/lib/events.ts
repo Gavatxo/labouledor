@@ -10,6 +10,8 @@ export type DisplayEvent = {
   id: number;
   day: string;
   month: string;
+  /** Libellé complet, ex. « samedi 29 août ». */
+  dateLabel: string;
   name: string;
   type: string;
   time: string;
@@ -37,6 +39,7 @@ export function toDisplay(r: ConcoursRow): DisplayEvent {
     id: r.id,
     day: String(d.getDate()).padStart(2, "0"),
     month: MONTHS[d.getMonth()] ?? "",
+    dateLabel: d.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" }),
     name: r.name,
     type: r.type,
     time: r.time,

@@ -4,7 +4,7 @@ import { useState, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ModalContext } from "./ModalContext";
-import { CLUB, NAV, NAV_MOBILE, FOOTER_COLS, HIGHLIGHT } from "@/data/club";
+import { CLUB, NAV, NAV_MOBILE, FOOTER_COLS } from "@/data/club";
 
 const GOLD = "#d4a437";
 
@@ -160,7 +160,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
             >
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 16 }}>
                 <div>
-                  <div style={{ fontSize: 11, letterSpacing: ".16em", textTransform: "uppercase", color: "var(--gold-dp)" }}>Samedi 29 août · {HIGHLIGHT.place}</div>
+                  <div style={{ fontSize: 11, letterSpacing: ".16em", textTransform: "uppercase", color: "var(--gold-dp)" }}>La Boule d&apos;Or · Nibelle</div>
                   <h3 style={{ fontSize: 30, margin: "8px 0 0" }}>Inscription au concours</h3>
                 </div>
                 <button onClick={() => setModal(false)} aria-label="Fermer" style={{ flex: "0 0 auto", width: 40, height: 40, borderRadius: 999, border: "1px solid rgba(27,24,21,.15)", background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -174,7 +174,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
               <div className="field" style={{ marginTop: 14 }}><label>Email de contact</label><input className="input" placeholder="equipe@exemple.fr" /></div>
               <div className="field" style={{ marginTop: 14 }}><label>Téléphone</label><input className="input" placeholder="06 12 34 56 78" /></div>
               <div style={{ marginTop: 18, padding: "16px 18px", borderRadius: "var(--radius-md)", background: "rgba(212,164,55,.16)", fontSize: 14 }}>
-                Concours <strong>gratuit</strong> — doublette, 14h30. Buvette et restauration sur place.
+                On te recontacte pour valider ton équipe. Buvette et restauration sur place le jour du concours.
               </div>
               <button onClick={() => setModal(false)} className="gold-btn" style={{ width: "100%", marginTop: 20, padding: 17, borderRadius: 999, border: 0, background: "var(--gold)", color: "#14120f", fontFamily: "var(--font-heading)", fontSize: 16, cursor: "pointer" }}>
                 Valider l'inscription

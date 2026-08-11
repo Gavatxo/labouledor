@@ -1,13 +1,15 @@
 import Link from "next/link";
 import ModalTrigger from "@/components/ModalTrigger";
 import FeatureIcon from "@/components/FeatureIcon";
-import { FEATURES, PARTNERS, IMAGES, HIGHLIGHT } from "@/data/club";
+import { FEATURES, PARTNERS, IMAGES } from "@/data/club";
 import { getEvents } from "@/lib/events";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const upcoming = (await getEvents()).filter((e) => !e.past);
+  const next = upcoming[0];
+  const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
   return (
     <main>
@@ -34,16 +36,18 @@ export default async function HomePage() {
       </section>
 
       {/* ══ BANDEAU PROCHAIN CONCOURS ══ */}
-      <section style={{ background: "var(--gold)", color: "#14120f" }}>
-        <div style={{ maxWidth: 1240, margin: "0 auto", padding: "22px 24px", display: "flex", flexWrap: "wrap", alignItems: "center", gap: "18px 34px", justifyContent: "space-between" }}>
-          <span style={{ fontFamily: "var(--font-heading)", fontSize: 19 }}>Prochain concours · Samedi 29 août — {HIGHLIGHT.place}</span>
-          <span style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-            <span style={{ padding: "6px 14px", borderRadius: 999, background: "rgba(20,18,15,.12)", fontSize: 13, fontWeight: 700 }}>Doublette</span>
-            <span style={{ padding: "6px 14px", borderRadius: 999, background: "rgba(20,18,15,.12)", fontSize: 13, fontWeight: 700 }}>Gratuit</span>
-            <ModalTrigger style={{ padding: "6px 16px", borderRadius: 999, background: "#14120f", color: "var(--gold-lt)", fontSize: 13, fontWeight: 700 }}>S&apos;inscrire →</ModalTrigger>
-          </span>
-        </div>
-      </section>
+      {next && (
+        <section style={{ background: "var(--gold)", color: "#14120f" }}>
+          <div style={{ maxWidth: 1240, margin: "0 auto", padding: "22px 24px", display: "flex", flexWrap: "wrap", alignItems: "center", gap: "18px 34px", justifyContent: "space-between" }}>
+            <span style={{ fontFamily: "var(--font-heading)", fontSize: 19 }}>Prochain concours · {cap(next.dateLabel)}{next.place ? ` — ${next.place}` : ""}</span>
+            <span style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center" }}>
+              <span style={{ padding: "6px 14px", borderRadius: 999, background: "rgba(20,18,15,.12)", fontSize: 13, fontWeight: 700 }}>{next.type}</span>
+              {next.price && <span style={{ padding: "6px 14px", borderRadius: 999, background: "rgba(20,18,15,.12)", fontSize: 13, fontWeight: 700 }}>{next.price}</span>}
+              <ModalTrigger style={{ padding: "6px 16px", borderRadius: 999, background: "#14120f", color: "var(--gold-lt)", fontSize: 13, fontWeight: 700 }}>S&apos;inscrire →</ModalTrigger>
+            </span>
+          </div>
+        </section>
+      )}
 
       {/* ══ QUI SOMMES-NOUS ══ */}
       <section style={{ background: "var(--color-bg)" }}>
