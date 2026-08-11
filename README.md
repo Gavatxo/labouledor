@@ -6,11 +6,47 @@ Construit avec **Next.js (App Router) + TypeScript**, fidèle à la maquette « 
 ## Démarrer
 
 ```bash
-npm run dev      # serveur de développement → http://localhost:3000
-npm run build    # build de production
-npm run start    # sert le build de production
-npm run lint     # ESLint
+cp .env.example .env   # puis renseigner DATABASE_URL, ADMIN_PASSWORD, SESSION_SECRET
+npm install
+npm run db:push        # crée la table `concours` dans la base
+npm run db:seed        # insère les concours de départ (idempotent)
+npm run dev            # → http://localhost:3000  (back-office : /admin)
 ```
+
+Autres scripts : `npm run build` (prod), `npm run start`, `npm run lint`.
+
+### Base de données en local (Docker)
+
+```bash
+docker run -d --name bdo-pg \
+  -e POSTGRES_USER=bdo -e POSTGRES_PASSWORD=bdo -e POSTGRES_DB=labouledor \
+  -p 5432:5432 postgres:16-alpine
+# DATABASE_URL="postgresql://bdo:bdo@localhost:5432/labouledor"
+```
+Arrêter / relancer : `docker stop bdo-pg` / `docker start bdo-pg`.
+
+## Back-office (`/admin`)
+
+Espace protégé par **mot de passe** (`ADMIN_PASSWORD`) pour gérer les concours :
+créer, modifier, supprimer — les changements apparaissent **immédiatement** sur
+l'accueil et la page `/concours`.
+
+- Connexion : `/admin` → redirige vers `/admin/login`.
+- Les concours sont stockés en base (table `concours`), plus dans le code.
+- Schéma défini dans [`src/db/schema.ts`](src/db/schema.ts) ; accès en lecture
+  dans [`src/lib/events.ts`](src/lib/events.ts) ; actions CRUD dans
+  [`src/app/admin/actions.ts`](src/app/admin/actions.ts).
+
+## Déploiement (Vercel + Neon Postgres)
+
+1. Importer le repo GitHub dans **Vercel**.
+2. Dans l'onglet **Storage**, ajouter **Neon Postgres** (Marketplace) → `DATABASE_URL`
+   est injecté automatiquement.
+3. Ajouter les variables d'environnement **`ADMIN_PASSWORD`** et **`SESSION_SECRET`**
+   (générer le secret : `openssl rand -base64 32`).
+4. Initialiser la base une fois (en local, `DATABASE_URL` pointant sur Neon) :
+   `npm run db:push && npm run db:seed`.
+5. Déployer. Le back-office est sur `https://<votre-domaine>/admin`.
 
 ## Pages (V1)
 
@@ -29,9 +65,9 @@ boutons « S'inscrire » du site.
 
 ## Modifier le contenu
 
-**Tout le contenu éditorial est centralisé dans [`src/data/club.ts`](src/data/club.ts)** :
-concours, résultats, membres du bureau, valeurs, infos pratiques, partenaires…
-Éditez ce fichier pour mettre le site à jour, sans toucher au reste.
+- **Concours** → via le **back-office `/admin`** (stockés en base). Plus besoin de toucher au code.
+- **Le reste** (résultats, bureau, valeurs, infos pratiques, partenaires…) est centralisé
+  dans [`src/data/club.ts`](src/data/club.ts) — éditez ce fichier pour mettre à jour le site.
 
 ## Remplacer les photos
 
@@ -46,12 +82,14 @@ Le logo (`public/assets/logo.svg`) est vectoriel et sert aussi de favicon
 
 ## À venir (V2)
 
-- Résultats des championnats
+- Résultats des championnats (même base, mêmes patterns)
 - Suivi des parties en direct (partie par partie)
-- Espace membres / gestion des inscriptions
+- Gestion des inscriptions en ligne + comptes individuels (Clerk) pour le bureau
 
 ## Stack
 
 - Next.js 16 (App Router) · React 19 · TypeScript
+- **Postgres + Drizzle ORM** (concours) ; back-office via Server Actions
+- Auth back-office : mot de passe partagé + cookie de session signé (HMAC), middleware
 - Polices Caprasimo + Figtree via `next/font` (aucune requête externe au runtime)
 - Design system « Organic » (tokens gold / ink) porté en CSS variables dans `src/app/globals.css`

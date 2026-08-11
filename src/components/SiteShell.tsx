@@ -13,6 +13,9 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState(false);
   const [modal, setModal] = useState(false);
 
+  // Le back-office a sa propre coque : pas de header/footer public.
+  if (pathname.startsWith("/admin")) return <>{children}</>;
+
   const openModal = () => {
     setModal(true);
     setMenu(false);

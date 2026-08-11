@@ -1,10 +1,13 @@
 import Link from "next/link";
 import ModalTrigger from "@/components/ModalTrigger";
 import FeatureIcon from "@/components/FeatureIcon";
-import { EVENTS, FEATURES, PARTNERS, IMAGES, HIGHLIGHT } from "@/data/club";
+import { FEATURES, PARTNERS, IMAGES, HIGHLIGHT } from "@/data/club";
+import { getEvents } from "@/lib/events";
 
-export default function HomePage() {
-  const upcoming = EVENTS.filter((e) => !e.past);
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const upcoming = (await getEvents()).filter((e) => !e.past);
 
   return (
     <main>

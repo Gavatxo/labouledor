@@ -3,15 +3,16 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useModal } from "@/components/ModalContext";
-import { EVENTS, CONCOURS_FILTERS, type ConcoursFilter } from "@/data/club";
+import { CONCOURS_FILTERS, type ConcoursFilter } from "@/data/club";
+import type { DisplayEvent } from "@/lib/events";
 
 const GOLD = "#d4a437", GOLD_LT = "#efd08a", INK = "#14120f";
 
-export default function ConcoursView() {
+export default function ConcoursView({ events }: { events: DisplayEvent[] }) {
   const { openModal } = useModal();
   const [filter, setFilter] = useState<ConcoursFilter>("À venir");
 
-  const filtered = EVENTS.filter((e) =>
+  const filtered = events.filter((e) =>
     filter === "Tous" ? true : filter === "Passés" ? e.past : filter === "À venir" ? !e.past : e.type === filter
   );
 
