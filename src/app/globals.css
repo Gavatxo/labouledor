@@ -123,6 +123,11 @@ button { font-family: inherit; }
   .nav-desktop { display: none !important; }
   .nav-mobile-btn { display: flex !important; }
 }
+/* Bureau : 2 lignes de 4 sur desktop, repli sur mobile */
+.bureau-grid { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 900px) { .bureau-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+@media (max-width: 480px) { .bureau-grid { grid-template-columns: 1fr !important; } }
+
 .result-grid { grid-template-columns: minmax(240px, 0.85fr) 1.7fr; }
 @media (max-width: 760px) {
   .result-grid { grid-template-columns: 1fr !important; }

@@ -66,7 +66,7 @@ export default function ClubPage() {
         <div style={{ maxWidth: 1240, margin: "0 auto", padding: "clamp(48px,6vw,90px) 24px" }}>
           <h2 style={{ fontSize: "clamp(30px,4vw,52px)", margin: "0 0 8px" }}>Le bureau</h2>
           <p style={{ fontSize: 15, color: "rgba(27,24,21,.6)", margin: "0 0 32px" }}>L&apos;équipe de bénévoles qui fait tourner le club au quotidien.</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 18 }}>
+          <div className="bureau-grid" style={{ display: "grid", gap: 18 }}>
             {BUREAU.map((b, i) => (
               <div key={i} style={{ textAlign: "center", padding: "26px 18px", background: "var(--cream)", border: "1px solid rgba(27,24,21,.08)", borderRadius: "var(--radius-lg)" }}>
                 <div style={{ width: 96, height: 96, borderRadius: 999, margin: "0 auto 16px", background: "rgba(212,164,55,.22)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-heading)", fontSize: 28, color: "var(--gold-dp)" }}>{b.initials}</div>
