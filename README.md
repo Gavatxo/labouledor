@@ -33,9 +33,19 @@ l'accueil et la page `/concours`.
 
 - Connexion : `/admin` → redirige vers `/admin/login`.
 - Les concours sont stockés en base (table `concours`), plus dans le code.
+- Depuis la page d'édition d'un concours, on peut **ajouter des photos** (avec
+  une catégorie) : elles s'affichent dynamiquement dans la galerie **`/vie`**.
 - Schéma défini dans [`src/db/schema.ts`](src/db/schema.ts) ; accès en lecture
-  dans [`src/lib/events.ts`](src/lib/events.ts) ; actions CRUD dans
-  [`src/app/admin/actions.ts`](src/app/admin/actions.ts).
+  dans [`src/lib/events.ts`](src/lib/events.ts) / [`src/lib/photos.ts`](src/lib/photos.ts) ;
+  actions CRUD dans [`src/app/admin/actions.ts`](src/app/admin/actions.ts).
+
+### Images
+
+- En **local**, les photos uploadées sont écrites dans `public/uploads/` (git-ignoré).
+- En **prod**, définir `BLOB_READ_WRITE_TOKEN` (onglet **Storage → Blob** sur Vercel) :
+  les images vont alors sur **Vercel Blob**. Le code bascule automatiquement.
+- Les photos « fixes » (logo, hero) restent dans `public/assets/` ; voir `IMAGES`
+  dans [`src/data/club.ts`](src/data/club.ts).
 
 ## Déploiement (Vercel + Neon Postgres)
 

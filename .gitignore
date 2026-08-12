@@ -45,3 +45,4 @@ next-env.d.ts
 
 # garder l'exemple d'env
 !.env.example
+public/uploads/

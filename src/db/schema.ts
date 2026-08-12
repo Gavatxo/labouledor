@@ -23,3 +23,19 @@ export const concours = pgTable("concours", {
 
 export type ConcoursRow = typeof concours.$inferSelect;
 export type NewConcours = typeof concours.$inferInsert;
+
+/** Une photo de la galerie, éventuellement rattachée à un concours. */
+export const photos = pgTable("photos", {
+  id: serial("id").primaryKey(),
+  /** URL publique (Vercel Blob en prod, /uploads/… en local). */
+  url: text("url").notNull(),
+  caption: text("caption").notNull().default(""),
+  /** Catégorie de galerie (Concours, Vie du club, Événements…). */
+  category: text("category").notNull().default("Concours"),
+  /** Concours d'origine (null si photo autonome). */
+  concoursId: integer("concours_id").references(() => concours.id, { onDelete: "set null" }),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export type PhotoRow = typeof photos.$inferSelect;
+export type NewPhoto = typeof photos.$inferInsert;

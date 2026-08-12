@@ -5,8 +5,10 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { eq } from "drizzle-orm";
 import { getDb } from "@/db";
-import { concours, type NewConcours } from "@/db/schema";
+import { concours, photos, type NewConcours } from "@/db/schema";
 import { checkPassword, createSessionCookie, SESSION_COOKIE } from "@/lib/auth";
+import { saveImage, deleteImage } from "@/lib/storage";
+import { GALLERY_CATS } from "@/data/club";
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -61,6 +63,7 @@ function parseForm(formData: FormData): NewConcours {
 function revalidateAll() {
   revalidatePath("/");
   revalidatePath("/concours");
+  revalidatePath("/vie");
   revalidatePath("/admin");
 }
 
@@ -89,4 +92,49 @@ export async function deleteConcours(formData: FormData) {
     revalidateAll();
   }
   redirect("/admin");
+}
+
+// ── Photos ─────────────────────────────────────────────────────────────
+const MAX_BYTES = 8 * 1024 * 1024; // 8 Mo
+
+/** Upload d'une photo, éventuellement rattachée à un concours. */
+export async function uploadPhoto(formData: FormData) {
+  const concoursId = Number(formData.get("concoursId")) || null;
+  const back = concoursId ? `/admin/concours/${concoursId}` : "/admin";
+
+  const file = formData.get("file");
+  if (!(file instanceof File) || file.size === 0) redirect(`${back}?perror=empty`);
+  if (!file.type.startsWith("image/")) redirect(`${back}?perror=type`);
+  if (file.size > MAX_BYTES) redirect(`${back}?perror=size`);
+
+  const catInput = String(formData.get("category") ?? "Concours");
+  const category = (GALLERY_CATS as readonly string[]).includes(catInput) && catInput !== "Tout" ? catInput : "Concours";
+  const caption = String(formData.get("caption") ?? "").trim();
+
+  let url: string;
+  try {
+    url = await saveImage(file);
+  } catch {
+    redirect(`${back}?perror=save`);
+  }
+
+  await getDb().insert(photos).values({ url, caption, category, concoursId });
+  revalidateAll();
+  redirect(back);
+}
+
+export async function deletePhoto(formData: FormData) {
+  const id = Number(formData.get("id"));
+  const concoursId = Number(formData.get("concoursId")) || null;
+  const back = concoursId ? `/admin/concours/${concoursId}` : "/admin";
+
+  if (id) {
+    const [row] = await getDb().select().from(photos).where(eq(photos.id, id));
+    if (row) {
+      await deleteImage(row.url);
+      await getDb().delete(photos).where(eq(photos.id, id));
+      revalidateAll();
+    }
+  }
+  redirect(back);
 }

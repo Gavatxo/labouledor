@@ -19,7 +19,7 @@ export const CLUB = {
 } as const;
 
 export const IMAGES = {
-  equipe: "/assets/equipe.svg",
+  equipe: "/assets/equipe.jpg",
   podium1: "/assets/podium-1.svg",
   podium2: "/assets/podium-2.svg",
 } as const;
