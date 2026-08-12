@@ -97,10 +97,16 @@ export async function deleteConcours(formData: FormData) {
 // ── Photos ─────────────────────────────────────────────────────────────
 const MAX_BYTES = 8 * 1024 * 1024; // 8 Mo
 
+/** Redirection interne sûre (évite les open redirects). */
+function safeBack(formData: FormData, fallback: string): string {
+  const to = String(formData.get("redirectTo") ?? "");
+  return to.startsWith("/admin") ? to : fallback;
+}
+
 /** Upload d'une photo, éventuellement rattachée à un concours. */
 export async function uploadPhoto(formData: FormData) {
   const concoursId = Number(formData.get("concoursId")) || null;
-  const back = concoursId ? `/admin/concours/${concoursId}` : "/admin";
+  const back = safeBack(formData, concoursId ? `/admin/concours/${concoursId}` : "/admin/galerie");
 
   const file = formData.get("file");
   if (!(file instanceof File) || file.size === 0) redirect(`${back}?perror=empty`);
@@ -126,7 +132,7 @@ export async function uploadPhoto(formData: FormData) {
 export async function deletePhoto(formData: FormData) {
   const id = Number(formData.get("id"));
   const concoursId = Number(formData.get("concoursId")) || null;
-  const back = concoursId ? `/admin/concours/${concoursId}` : "/admin";
+  const back = safeBack(formData, concoursId ? `/admin/concours/${concoursId}` : "/admin/galerie");
 
   if (id) {
     const [row] = await getDb().select().from(photos).where(eq(photos.id, id));

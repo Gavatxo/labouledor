@@ -13,6 +13,10 @@ export default function AdminHeader() {
             <span style={{ fontSize: 10, letterSpacing: ".24em", textTransform: "uppercase", color: "rgba(246,236,217,.5)" }}>La Boule d&apos;Or</span>
           </span>
         </Link>
+        <nav style={{ display: "flex", alignItems: "center", gap: 4, marginLeft: "auto", marginRight: 6 }}>
+          <Link href="/admin" className="navlink" style={{ fontSize: 13, color: "rgba(246,236,217,.8)", padding: "8px 14px", borderRadius: 999 }}>Concours</Link>
+          <Link href="/admin/galerie" className="navlink" style={{ fontSize: 13, color: "rgba(246,236,217,.8)", padding: "8px 14px", borderRadius: 999 }}>Galerie</Link>
+        </nav>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <Link href="/concours" target="_blank" style={{ fontSize: 13, color: "rgba(246,236,217,.7)", padding: "8px 14px" }}>Voir le site ↗</Link>
           <form action={logout}>

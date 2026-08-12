@@ -13,3 +13,8 @@ export async function getGalleryPhotos(): Promise<GalleryPhoto[]> {
 export async function getConcoursPhotos(concoursId: number): Promise<PhotoRow[]> {
   return getDb().select().from(photos).where(eq(photos.concoursId, concoursId)).orderBy(desc(photos.createdAt));
 }
+
+/** Toutes les photos (gestion depuis la Galerie du back-office). */
+export async function getAllPhotos(): Promise<PhotoRow[]> {
+  return getDb().select().from(photos).orderBy(desc(photos.createdAt));
+}

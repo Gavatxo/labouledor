@@ -13,27 +13,32 @@ const ERRORS: Record<string, string> = {
   save: "Échec de l'enregistrement de l'image.",
 };
 
-export default function ConcoursPhotos({
-  concoursId,
+export default function PhotoManager({
   photos,
+  redirectTo,
+  concoursId,
+  defaultCategory = "Concours",
+  title = "Photos",
+  subtitle = "Ajoutez des photos : elles apparaissent dans la galerie « La vie du club ».",
   error,
 }: {
-  concoursId: number;
   photos: PhotoRow[];
+  redirectTo: string;
+  concoursId?: number;
+  defaultCategory?: string;
+  title?: string;
+  subtitle?: string;
   error?: string;
 }) {
   return (
-    <section style={{ marginTop: 40, maxWidth: 720 }}>
-      <h2 style={{ fontSize: "clamp(22px,2.6vw,30px)", margin: "0 0 6px" }}>Photos du concours</h2>
-      <p style={{ fontSize: 14, color: "rgba(27,24,21,.6)", margin: "0 0 20px" }}>
-        Ajoutez des photos : elles apparaissent dans la galerie « La vie du club », selon la catégorie choisie.
-      </p>
+    <section style={{ marginTop: 40, maxWidth: 760 }}>
+      <h2 style={{ fontSize: "clamp(22px,2.6vw,30px)", margin: "0 0 6px" }}>{title}</h2>
+      <p style={{ fontSize: 14, color: "rgba(27,24,21,.6)", margin: "0 0 20px" }}>{subtitle}</p>
 
       {error && ERRORS[error] && (
         <p style={{ margin: "0 0 16px", fontSize: 14, color: "#b42828" }}>{ERRORS[error]}</p>
       )}
 
-      {/* Photos existantes */}
       {photos.length > 0 && (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(140px,1fr))", gap: 12, marginBottom: 24 }}>
           {photos.map((p) => (
@@ -41,15 +46,15 @@ export default function ConcoursPhotos({
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={p.url} alt={p.caption} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
               <span style={{ position: "absolute", left: 6, bottom: 6, padding: "3px 8px", borderRadius: 999, background: "rgba(20,18,15,.7)", color: "#f6ecd9", fontSize: 10, letterSpacing: ".04em" }}>{p.category}</span>
-              <DeletePhotoButton id={p.id} concoursId={concoursId} />
+              <DeletePhotoButton id={p.id} concoursId={concoursId} redirectTo={redirectTo} />
             </figure>
           ))}
         </div>
       )}
 
-      {/* Formulaire d'ajout */}
       <form action={uploadPhoto} style={{ display: "flex", flexDirection: "column", gap: 14, padding: 20, background: "var(--cream)", border: "1px solid rgba(27,24,21,.08)", borderRadius: "var(--radius-lg)" }}>
-        <input type="hidden" name="concoursId" value={concoursId} />
+        <input type="hidden" name="redirectTo" value={redirectTo} />
+        {concoursId ? <input type="hidden" name="concoursId" value={concoursId} /> : null}
         <div className="field">
           <label style={labelStyle}>Image (JPG/PNG/WebP, 8 Mo max)</label>
           <input className="input" type="file" name="file" accept="image/*" required style={{ padding: "10px 14px" }} />
@@ -61,7 +66,7 @@ export default function ConcoursPhotos({
           </div>
           <div className="field">
             <label style={labelStyle}>Catégorie (galerie)</label>
-            <select className="input" name="category" defaultValue="Concours">
+            <select className="input" name="category" defaultValue={defaultCategory}>
               {CATS.map((c) => (
                 <option key={c} value={c}>{c}</option>
               ))}

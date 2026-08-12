@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import AdminHeader from "../../AdminHeader";
 import ConcoursForm from "../../ConcoursForm";
-import ConcoursPhotos from "../../ConcoursPhotos";
+import PhotoManager from "../../PhotoManager";
 import { getConcoursRow } from "@/lib/events";
 import { getConcoursPhotos } from "@/lib/photos";
 
@@ -28,7 +28,14 @@ export default async function EditConcoursPage({
         <Link href="/admin" style={{ fontSize: 13, color: "rgba(27,24,21,.6)" }}>← Retour</Link>
         <h1 style={{ fontSize: "clamp(26px,3.4vw,40px)", margin: "12px 0 24px" }}>Modifier le concours</h1>
         <ConcoursForm row={row} />
-        <ConcoursPhotos concoursId={row.id} photos={photos} error={perror} />
+        <PhotoManager
+          concoursId={row.id}
+          photos={photos}
+          redirectTo={`/admin/concours/${row.id}`}
+          title="Photos du concours"
+          subtitle="Ajoutez des photos : elles apparaissent dans la galerie « La vie du club », selon la catégorie choisie."
+          error={perror}
+        />
       </main>
     </>
   );

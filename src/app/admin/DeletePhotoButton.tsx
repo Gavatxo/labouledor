@@ -2,7 +2,7 @@
 
 import { deletePhoto } from "./actions";
 
-export default function DeletePhotoButton({ id, concoursId }: { id: number; concoursId?: number }) {
+export default function DeletePhotoButton({ id, concoursId, redirectTo }: { id: number; concoursId?: number; redirectTo: string }) {
   return (
     <form
       action={deletePhoto}
@@ -12,6 +12,7 @@ export default function DeletePhotoButton({ id, concoursId }: { id: number; conc
       style={{ position: "absolute", top: 8, right: 8 }}
     >
       <input type="hidden" name="id" value={id} />
+      <input type="hidden" name="redirectTo" value={redirectTo} />
       {concoursId ? <input type="hidden" name="concoursId" value={concoursId} /> : null}
       <button
         type="submit"
