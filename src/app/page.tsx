@@ -3,12 +3,25 @@ import ModalTrigger from "@/components/ModalTrigger";
 import FeatureIcon from "@/components/FeatureIcon";
 import { FEATURES, PARTNERS, IMAGES } from "@/data/club";
 import { getEvents } from "@/lib/events";
+import { getGalleryPhotos } from "@/lib/photos";
 
 export const dynamic = "force-dynamic";
+
+// Catégories utilisées comme repli si moins de 3 photos ont été ajoutées.
+const VIE_PLACEHOLDERS = ["Concours", "Vie du club", "Événements"];
 
 export default async function HomePage() {
   const upcoming = (await getEvents()).filter((e) => !e.past);
   const next = upcoming[0];
+
+  // 3 dernières photos ajoutées (concours ou galerie), plus récentes d'abord.
+  const gallery = await getGalleryPhotos();
+  const vieTiles = [0, 1, 2].map((i) => {
+    const p = gallery[i];
+    return p
+      ? { photo: true as const, src: p.src, alt: p.alt || p.cat, label: p.cat }
+      : { photo: false as const, label: VIE_PLACEHOLDERS[i] };
+  });
   const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
   return (
@@ -143,12 +156,22 @@ export default async function HomePage() {
             <Link href="/vie" style={{ fontSize: 14, fontWeight: 700, letterSpacing: ".06em", textTransform: "uppercase", borderBottom: "2px solid var(--gold)", paddingBottom: 4 }}>Voir la galerie</Link>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 16 }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={IMAGES.equipe} alt="Soirée du club" style={{ gridColumn: "span 2", width: "100%", height: 340, objectFit: "cover", objectPosition: "50% 40%", borderRadius: "var(--radius-lg)" }} />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={IMAGES.podium1} alt="Podium" style={{ width: "100%", height: 340, objectFit: "cover", objectPosition: "50% 30%", borderRadius: "var(--radius-lg)" }} />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={IMAGES.podium2} alt="Remise des prix" style={{ width: "100%", height: 340, objectFit: "cover", objectPosition: "50% 35%", borderRadius: "var(--radius-lg)" }} />
+            {vieTiles.map((t, i) => (
+              <div key={i} style={{ position: "relative", gridColumn: i === 0 ? "span 2" : undefined, height: 340, borderRadius: "var(--radius-lg)", overflow: "hidden", background: t.photo ? "var(--ink)" : "linear-gradient(135deg,#211d19,#14120f)" }}>
+                {t.photo ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={t.src} alt={t.alt} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 40%" }} />
+                ) : (
+                  <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8, textAlign: "center", padding: 20 }}>
+                    <span style={{ fontFamily: "var(--font-heading)", fontSize: 22, color: "var(--gold-lt)" }}>{t.label}</span>
+                    <span style={{ fontSize: 12, letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.45)" }}>Photos à venir</span>
+                  </div>
+                )}
+                {t.photo && (
+                  <span style={{ position: "absolute", left: 14, bottom: 14, padding: "6px 13px", borderRadius: 999, background: "rgba(20,18,15,.68)", color: "var(--gold-lt)", fontSize: 12, fontWeight: 700, letterSpacing: ".05em", textTransform: "uppercase" }}>{t.label}</span>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
