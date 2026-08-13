@@ -29,7 +29,6 @@ export type NavItem = { href: string; label: string };
 export const NAV: NavItem[] = [
   { href: "/", label: "Accueil" },
   { href: "/concours", label: "Concours" },
-  { href: "/resultats", label: "Résultats" },
   { href: "/club", label: "Le club" },
   { href: "/vie", label: "La vie du club" },
   { href: "/nous-trouver", label: "Nous trouver" },
@@ -192,7 +191,6 @@ export const FOOTER_COLS = [
     title: "Jouer",
     links: [
       { label: "Les concours", href: "/concours" },
-      { label: "Les résultats", href: "/resultats" },
       { label: "Nous trouver", href: "/nous-trouver" },
     ],
   },

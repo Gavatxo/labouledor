@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { useModal } from "@/components/ModalContext";
 import { CONCOURS_FILTERS, type ConcoursFilter } from "@/data/club";
 import type { DisplayEvent } from "@/lib/events";
@@ -81,7 +80,7 @@ export default function ConcoursView({ events }: { events: DisplayEvent[] }) {
                   {open ? (
                     <button onClick={openModal} className="dark-btn" style={{ textAlign: "center", padding: "15px 24px", borderRadius: 999, border: 0, cursor: "pointer", background: GOLD, color: INK, fontFamily: "var(--font-heading)", fontSize: 15 }}>S&apos;inscrire</button>
                   ) : (
-                    <Link href="/resultats" className="dark-btn" style={{ textAlign: "center", padding: "15px 24px", borderRadius: 999, background: INK, color: GOLD_LT, fontFamily: "var(--font-heading)", fontSize: 15 }}>Voir les résultats</Link>
+                    <span style={{ textAlign: "center", padding: "15px 24px", borderRadius: 999, background: INK, color: GOLD_LT, fontFamily: "var(--font-heading)", fontSize: 15, opacity: 0.8 }}>Concours terminé</span>
                   )}
                   <span style={{ fontSize: 12, textAlign: "center", color: "rgba(27,24,21,.45)" }}>Règlement FFPJP · licence non obligatoire</span>
                 </div>
