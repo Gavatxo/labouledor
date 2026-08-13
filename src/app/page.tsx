@@ -56,7 +56,7 @@ export default async function HomePage() {
             <span style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center" }}>
               <span style={{ padding: "6px 14px", borderRadius: 999, background: "rgba(20,18,15,.12)", fontSize: 13, fontWeight: 700 }}>{next.type}</span>
               {next.price && <span style={{ padding: "6px 14px", borderRadius: 999, background: "rgba(20,18,15,.12)", fontSize: 13, fontWeight: 700 }}>{next.price}</span>}
-              <ModalTrigger style={{ padding: "6px 16px", borderRadius: 999, background: "#14120f", color: "var(--gold-lt)", fontSize: 13, fontWeight: 700 }}>S&apos;inscrire →</ModalTrigger>
+              <ModalTrigger concours={`${next.name} — ${cap(next.dateLabel)}`} style={{ padding: "6px 16px", borderRadius: 999, background: "#14120f", color: "var(--gold-lt)", fontSize: 13, fontWeight: 700 }}>S&apos;inscrire →</ModalTrigger>
             </span>
           </div>
         </section>
@@ -121,7 +121,7 @@ export default async function HomePage() {
                   <div style={{ height: 7, borderRadius: 999, background: "rgba(27,24,21,.1)", overflow: "hidden", marginBottom: 20 }}>
                     <div style={{ height: "100%", borderRadius: 999, background: "var(--gold)", width: ev.pct }} />
                   </div>
-                  <ModalTrigger style={{ marginTop: "auto", textAlign: "center", padding: 14, borderRadius: 999, background: "var(--gold)", color: "#14120f", fontFamily: "var(--font-heading)", fontSize: 15, display: "block" }}>S&apos;inscrire</ModalTrigger>
+                  <ModalTrigger concours={`${ev.name} — ${cap(ev.dateLabel)}`} style={{ marginTop: "auto", textAlign: "center", padding: 14, borderRadius: 999, background: "var(--gold)", color: "#14120f", fontFamily: "var(--font-heading)", fontSize: 15, display: "block" }}>S&apos;inscrire</ModalTrigger>
                 </article>
               );
             })}

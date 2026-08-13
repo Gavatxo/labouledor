@@ -14,11 +14,13 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState(false);
   const [modal, setModal] = useState(false);
   const [modalKey, setModalKey] = useState(0);
+  const [concours, setConcours] = useState("");
 
   // Le back-office a sa propre coque : pas de header/footer public.
   if (pathname.startsWith("/admin")) return <>{children}</>;
 
-  const openModal = () => {
+  const openModal = (c?: string) => {
+    setConcours(c ?? "");
     setModalKey((k) => k + 1);
     setModal(true);
     setMenu(false);
@@ -152,7 +154,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
         </footer>
 
         {/* ══ MODALE INSCRIPTION ══ */}
-        {modal && <ConcoursModal key={modalKey} onClose={() => setModal(false)} />}
+        {modal && <ConcoursModal key={modalKey} concours={concours} onClose={() => setModal(false)} />}
       </div>
     </ModalContext.Provider>
   );

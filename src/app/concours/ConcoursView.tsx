@@ -78,7 +78,7 @@ export default function ConcoursView({ events }: { events: DisplayEvent[] }) {
                 <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 12 }}>
                   <div style={{ fontSize: 14, color: "rgba(27,24,21,.7)" }}><strong>{ev.left}</strong> · {ev.place}</div>
                   {open ? (
-                    <button onClick={openModal} className="dark-btn" style={{ textAlign: "center", padding: "15px 24px", borderRadius: 999, border: 0, cursor: "pointer", background: GOLD, color: INK, fontFamily: "var(--font-heading)", fontSize: 15 }}>S&apos;inscrire</button>
+                    <button onClick={() => openModal(`${ev.name} — ${ev.dateLabel}`)} className="dark-btn" style={{ textAlign: "center", padding: "15px 24px", borderRadius: 999, border: 0, cursor: "pointer", background: GOLD, color: INK, fontFamily: "var(--font-heading)", fontSize: 15 }}>S&apos;inscrire</button>
                   ) : (
                     <span style={{ textAlign: "center", padding: "15px 24px", borderRadius: 999, background: INK, color: GOLD_LT, fontFamily: "var(--font-heading)", fontSize: 15, opacity: 0.8 }}>Concours terminé</span>
                   )}

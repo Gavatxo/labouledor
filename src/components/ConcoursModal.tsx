@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { sendConcoursInscription } from "@/app/contact-actions";
 
-export default function ConcoursModal({ onClose }: { onClose: () => void }) {
+export default function ConcoursModal({ concours, onClose }: { concours?: string; onClose: () => void }) {
   const [state, formAction, pending] = useActionState(sendConcoursInscription, null);
 
   return (
@@ -19,6 +19,7 @@ export default function ConcoursModal({ onClose }: { onClose: () => void }) {
           <div>
             <div style={{ fontSize: 11, letterSpacing: ".16em", textTransform: "uppercase", color: "var(--gold-dp)" }}>La Boule d&apos;Or · Nibelle</div>
             <h3 style={{ fontSize: 30, margin: "8px 0 0" }}>Inscription au concours</h3>
+            {concours && <div style={{ marginTop: 6, fontSize: 15, fontWeight: 600, color: "rgba(27,24,21,.7)" }}>{concours}</div>}
           </div>
           <button onClick={onClose} aria-label="Fermer" style={{ flex: "0 0 auto", width: 40, height: 40, borderRadius: 999, border: "1px solid rgba(27,24,21,.15)", background: "transparent", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.75" strokeLinecap="round"><line x1="5" y1="5" x2="19" y2="19" /><line x1="19" y1="5" x2="5" y2="19" /></svg>
@@ -33,6 +34,7 @@ export default function ConcoursModal({ onClose }: { onClose: () => void }) {
           </div>
         ) : (
           <form action={formAction}>
+            <input type="hidden" name="concours" value={concours ?? ""} />
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginTop: 24 }}>
               <div className="field"><label>Joueur 1</label><input className="input" name="player1" placeholder="Prénom Nom" required /></div>
               <div className="field"><label>Joueur 2</label><input className="input" name="player2" placeholder="Prénom Nom" /></div>

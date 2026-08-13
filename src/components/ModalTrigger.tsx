@@ -9,17 +9,19 @@ export default function ModalTrigger({
   style,
   className,
   as = "a",
+  concours,
 }: {
   children: ReactNode;
   style?: CSSProperties;
   className?: string;
   as?: "a" | "button";
+  concours?: string;
 }) {
   const { openModal } = useModal();
 
   if (as === "button") {
     return (
-      <button type="button" className={className} style={style} onClick={openModal}>
+      <button type="button" className={className} style={style} onClick={() => openModal(concours)}>
         {children}
       </button>
     );
@@ -31,7 +33,7 @@ export default function ModalTrigger({
       style={style}
       onClick={(e) => {
         e.preventDefault();
-        openModal();
+        openModal(concours);
       }}
     >
       {children}
