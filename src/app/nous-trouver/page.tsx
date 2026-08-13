@@ -4,6 +4,7 @@ import { INFOS, MAP } from "@/data/club";
 export const metadata: Metadata = {
   title: "Nous trouver",
   description: "Le boulodrome de La Boule d'Or Nibelloise, au cœur de Nibelle (45). Adresse, accès, horaires et contact.",
+  alternates: { canonical: "/nous-trouver" },
 };
 
 export default function NousTrouverPage() {

@@ -8,6 +8,9 @@
    chemin correspondant dans IMAGES.
    ══════════════════════════════════════════════════════════════════════ */
 
+/** URL canonique de production (l'apex redirige vers www). Sert au SEO : metadataBase, sitemap, robots. */
+export const SITE_URL = "https://www.labouledornibelloise.fr";
+
 export const CLUB = {
   name: "La Boule d'Or",
   fullName: "La Boule d'Or Nibelloise",

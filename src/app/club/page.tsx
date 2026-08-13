@@ -4,6 +4,7 @@ import { VALUES, BUREAU, IMAGES } from "@/data/club";
 export const metadata: Metadata = {
   title: "Le club",
   description: "L'histoire, les valeurs et le bureau de La Boule d'Or Nibelloise, club de pétanque né à Nibelle.",
+  alternates: { canonical: "/club" },
 };
 
 export default function ClubPage() {
