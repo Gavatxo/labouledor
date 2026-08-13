@@ -2,6 +2,7 @@ import type { PhotoRow } from "@/db/schema";
 import { GALLERY_CATS } from "@/data/club";
 import { uploadPhoto } from "./actions";
 import DeletePhotoButton from "./DeletePhotoButton";
+import PhotoDropzone from "./PhotoDropzone";
 
 const CATS = GALLERY_CATS.filter((c) => c !== "Tout");
 const labelStyle = { display: "block", fontSize: 12, marginBottom: 5, color: "rgba(27,24,21,.7)" } as const;
@@ -56,12 +57,12 @@ export default function PhotoManager({
         <input type="hidden" name="redirectTo" value={redirectTo} />
         {concoursId ? <input type="hidden" name="concoursId" value={concoursId} /> : null}
         <div className="field">
-          <label style={labelStyle}>Image (JPG/PNG/WebP, 8 Mo max)</label>
-          <input className="input" type="file" name="file" accept="image/*" required style={{ padding: "10px 14px" }} />
+          <label style={labelStyle}>Images</label>
+          <PhotoDropzone />
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))", gap: 14 }}>
           <div className="field">
-            <label style={labelStyle}>Légende</label>
+            <label style={labelStyle}>Légende (appliquée à tout le lot)</label>
             <input className="input" name="caption" placeholder="Podium du concours d'été" />
           </div>
           <div className="field">
@@ -75,7 +76,7 @@ export default function PhotoManager({
         </div>
         <div>
           <button type="submit" className="gold-btn" style={{ padding: "12px 24px", borderRadius: 999, border: 0, background: "var(--gold)", color: "#14120f", fontFamily: "var(--font-heading)", fontSize: 15, cursor: "pointer" }}>
-            Ajouter la photo
+            Ajouter les photos
           </button>
         </div>
       </form>

@@ -103,28 +103,33 @@ function safeBack(formData: FormData, fallback: string): string {
   return to.startsWith("/admin") ? to : fallback;
 }
 
-/** Upload d'une photo, éventuellement rattachée à un concours. */
+/** Upload d'une ou plusieurs photos, éventuellement rattachées à un concours. */
 export async function uploadPhoto(formData: FormData) {
   const concoursId = Number(formData.get("concoursId")) || null;
   const back = safeBack(formData, concoursId ? `/admin/concours/${concoursId}` : "/admin/galerie");
 
-  const file = formData.get("file");
-  if (!(file instanceof File) || file.size === 0) redirect(`${back}?perror=empty`);
-  if (!file.type.startsWith("image/")) redirect(`${back}?perror=type`);
-  if (file.size > MAX_BYTES) redirect(`${back}?perror=size`);
+  const files = formData.getAll("file").filter((f): f is File => f instanceof File && f.size > 0);
+  if (files.length === 0) redirect(`${back}?perror=empty`);
+  for (const file of files) {
+    if (!file.type.startsWith("image/")) redirect(`${back}?perror=type`);
+    if (file.size > MAX_BYTES) redirect(`${back}?perror=size`);
+  }
 
   const catInput = String(formData.get("category") ?? "Concours");
   const category = (GALLERY_CATS as readonly string[]).includes(catInput) && catInput !== "Tout" ? catInput : "Concours";
   const caption = String(formData.get("caption") ?? "").trim();
 
-  let url: string;
+  // Légende et catégorie communes à tout le lot déposé.
+  let rows: { url: string; caption: string; category: string; concoursId: number | null }[];
   try {
-    url = await saveImage(file);
+    rows = await Promise.all(
+      files.map(async (file) => ({ url: await saveImage(file), caption, category, concoursId })),
+    );
   } catch {
     redirect(`${back}?perror=save`);
   }
 
-  await getDb().insert(photos).values({ url, caption, category, concoursId });
+  await getDb().insert(photos).values(rows);
   revalidateAll();
   redirect(back);
 }
