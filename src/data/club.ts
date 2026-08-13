@@ -16,7 +16,7 @@ export const CLUB = {
   fullName: "La Boule d'Or Nibelloise",
   place: "Nibelle · Loiret",
   foundedYear: "2026",
-  email: "contact@labouledor-nibelle.fr",
+  email: "contact@labouledornibelloise.fr",
   phone: "06 00 00 00 00",
   address: "Boulodrome de Nibelle — Rue du Stade, 45340 Nibelle",
 } as const;
@@ -168,7 +168,7 @@ export const INFOS = [
   { label: "Adresse", value: "Boulodrome de Nibelle — Rue du Stade, 45340 Nibelle" },
   { label: "Accès & parking", value: "Parking gratuit devant le terrain, 40 places. Accessible à pied depuis la place du village." },
   { label: "Horaires", value: "Entraînement libre le mardi à partir de 18h · Concours les samedis annoncés" },
-  { label: "Contact", value: "contact@labouledor-nibelle.fr · 06 00 00 00 00" },
+  { label: "Contact", value: "contact@labouledornibelloise.fr · 06 00 00 00 00" },
 ];
 
 export const STEPS = [
