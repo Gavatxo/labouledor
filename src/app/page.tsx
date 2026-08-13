@@ -16,7 +16,7 @@ export default async function HomePage() {
       {/* ══ HERO ══ */}
       <section style={{ position: "relative", minHeight: "82vh", display: "flex", alignItems: "flex-end", overflow: "hidden", background: "var(--ink)" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={IMAGES.equipe} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 25%", filter: "saturate(.72) contrast(1.02) brightness(.72)" }} />
+        <img src={IMAGES.equipe} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 45%", filter: "saturate(.72) contrast(1.02) brightness(.72)" }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,rgba(20,18,15,.55) 0%,rgba(20,18,15,.25) 35%,rgba(20,18,15,.92) 100%)" }} />
         <div style={{ position: "relative", maxWidth: 1240, margin: "0 auto", padding: "0 24px 74px", width: "100%" }}>
           <span style={{ display: "inline-flex", alignItems: "center", gap: 9, padding: "8px 16px", borderRadius: 999, border: "1px solid rgba(212,164,55,.5)", color: "var(--gold-lt)", fontSize: 12, fontWeight: 600, letterSpacing: ".16em", textTransform: "uppercase", animation: "bdo-rise .5s ease both" }}>
