@@ -143,7 +143,7 @@ export const BUREAU: Member[] = [
   { initials: "CG", name: "Clément Gonthier", role: "Secrétaire adjoint" },
   { initials: "AV", name: "Alexis Vogel", role: "Responsable sportif" },
   { initials: "BB", name: "Bastien Boursin", role: "Responsable communication" },
-  { initials: "RD", name: "Rachelle Douget", role: "Restauration & buvette" },
+  { initials: "RD", name: "Rachel Douget", role: "Restauration & buvette" },
 ];
 
 export const PARTNERS = [

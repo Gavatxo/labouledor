@@ -25,7 +25,7 @@ export default function ClubPage() {
           <div>
             <h2 style={{ fontSize: "clamp(28px,3.4vw,44px)", margin: "0 0 16px" }}>Notre histoire</h2>
             <p style={{ fontSize: 17, color: "rgba(27,24,21,.8)" }}>Tout a commencé par des parties improvisées les soirs d&apos;été, entre potes, sur le terrain du village. Une boule, un bouchon, une glacière — et l&apos;envie que ça devienne un vrai rendez-vous.</p>
-            <p style={{ fontSize: 17, color: "rgba(27,24,21,.8)" }}>En 2025, on a franchi le pas : statuts déposés, licences, premier concours. Le club était né.</p>
+            <p style={{ fontSize: 17, color: "rgba(27,24,21,.8)" }}>En 2026, on a franchi le pas : statuts déposés, licences, premier concours. Le club était né.</p>
             <h2 style={{ fontSize: "clamp(28px,3.4vw,44px)", margin: "34px 0 16px" }}>Pourquoi ce club ?</h2>
             <p style={{ fontSize: 17, color: "rgba(27,24,21,.8)" }}>Parce qu&apos;un village vit quand il se retrouve. Le club, c&apos;est le prétexte : on joue, on mange, on rigole, et tout le monde est invité — des ados aux anciens.</p>
           </div>
