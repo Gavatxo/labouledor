@@ -31,7 +31,7 @@ export default function ClubPage() {
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={IMAGES.podium2} alt="Le club au terrain" className="washed" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", objectPosition: "50% 38%", borderRadius: "var(--radius-lg)" }} />
+            <img src={IMAGES.equipe} alt="L'équipe de La Boule d'Or Nibelloise" className="washed" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", objectPosition: "50% 42%", borderRadius: "var(--radius-lg)" }} />
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
               <div style={{ padding: 22, borderRadius: "var(--radius-lg)", background: "var(--gold)" }}>
                 <div style={{ fontFamily: "var(--font-heading)", fontSize: 38, color: "#14120f" }}>32</div>
