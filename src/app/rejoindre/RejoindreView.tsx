@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { useModal } from "@/components/ModalContext";
+import { useActionState, useState } from "react";
 import { STEPS, LEVELS } from "@/data/club";
+import { sendJoinRequest } from "@/app/contact-actions";
 
 export default function RejoindreView() {
-  const { openModal } = useModal();
   const [level, setLevel] = useState<string>("Débutant");
+  const [state, formAction, pending] = useActionState(sendJoinRequest, null);
 
   return (
     <main>
@@ -45,40 +45,52 @@ export default function RejoindreView() {
           </div>
 
           <div style={{ padding: "clamp(26px,3vw,38px)", background: "var(--cream)", border: "1px solid rgba(27,24,21,.08)", borderRadius: "var(--radius-lg)", boxShadow: "var(--shadow-md)", alignSelf: "start" }}>
-            <h3 style={{ fontSize: 28, margin: "0 0 6px" }}>Je veux rejoindre La Boule d&apos;Or</h3>
-            <p style={{ fontSize: 15, color: "rgba(27,24,21,.6)", margin: "0 0 22px" }}>On te rappelle dans la semaine.</p>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
-              <div className="field"><label>Prénom</label><input className="input" placeholder="Léo" /></div>
-              <div className="field"><label>Nom</label><input className="input" placeholder="Marceau" /></div>
-            </div>
-            <div className="field" style={{ marginTop: 14 }}><label>Email</label><input className="input" placeholder="leo@exemple.fr" /></div>
-            <div className="field" style={{ marginTop: 14 }}><label>Téléphone</label><input className="input" placeholder="06 12 34 56 78" /></div>
-            <div className="field" style={{ marginTop: 14 }}>
-              <label>Ton niveau</label>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 6 }}>
-                {LEVELS.map((l) => {
-                  const active = level === l;
-                  return (
-                    <button
-                      key={l}
-                      onClick={() => setLevel(l)}
-                      style={{
-                        padding: "10px 18px", borderRadius: 999,
-                        border: `1px solid ${active ? "#a9761f" : "rgba(27,24,21,.18)"}`,
-                        background: active ? "rgba(212,164,55,.24)" : "transparent",
-                        color: active ? "#1b1815" : "rgba(27,24,21,.6)",
-                        fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all .2s",
-                      }}
-                    >
-                      {l}
-                    </button>
-                  );
-                })}
+            {state?.ok ? (
+              <div style={{ textAlign: "center", padding: "18px 0" }}>
+                <div style={{ fontFamily: "var(--font-heading)", fontSize: 26, marginBottom: 8 }}>Demande envoyée !</div>
+                <p style={{ fontSize: 15, color: "rgba(27,24,21,.7)", margin: 0 }}>Merci — on te recontacte dans la semaine. À très vite au terrain.</p>
               </div>
-            </div>
-            <button onClick={openModal} className="gold-btn" style={{ width: "100%", marginTop: 24, padding: 17, borderRadius: 999, border: 0, background: "var(--gold)", color: "#14120f", fontFamily: "var(--font-heading)", fontSize: 16, cursor: "pointer" }}>
-              Envoyer ma demande
-            </button>
+            ) : (
+              <form action={formAction}>
+                <h3 style={{ fontSize: 28, margin: "0 0 6px" }}>Je veux rejoindre La Boule d&apos;Or</h3>
+                <p style={{ fontSize: 15, color: "rgba(27,24,21,.6)", margin: "0 0 22px" }}>On te rappelle dans la semaine.</p>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+                  <div className="field"><label>Prénom</label><input className="input" name="firstName" placeholder="Léo" required /></div>
+                  <div className="field"><label>Nom</label><input className="input" name="lastName" placeholder="Marceau" required /></div>
+                </div>
+                <div className="field" style={{ marginTop: 14 }}><label>Email</label><input className="input" type="email" name="email" placeholder="leo@exemple.fr" /></div>
+                <div className="field" style={{ marginTop: 14 }}><label>Téléphone</label><input className="input" type="tel" name="phone" placeholder="06 12 34 56 78" /></div>
+                <input type="hidden" name="level" value={level} />
+                <div className="field" style={{ marginTop: 14 }}>
+                  <label>Ton niveau</label>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 6 }}>
+                    {LEVELS.map((l) => {
+                      const active = level === l;
+                      return (
+                        <button
+                          key={l}
+                          type="button"
+                          onClick={() => setLevel(l)}
+                          style={{
+                            padding: "10px 18px", borderRadius: 999,
+                            border: `1px solid ${active ? "#a9761f" : "rgba(27,24,21,.18)"}`,
+                            background: active ? "rgba(212,164,55,.24)" : "transparent",
+                            color: active ? "#1b1815" : "rgba(27,24,21,.6)",
+                            fontSize: 13, fontWeight: 600, cursor: "pointer", transition: "all .2s",
+                          }}
+                        >
+                          {l}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+                {state?.error && <p style={{ margin: "16px 0 0", fontSize: 14, color: "#b42828" }}>{state.error}</p>}
+                <button type="submit" disabled={pending} className="gold-btn" style={{ width: "100%", marginTop: 24, padding: 17, borderRadius: 999, border: 0, background: "var(--gold)", color: "#14120f", fontFamily: "var(--font-heading)", fontSize: 16, cursor: pending ? "default" : "pointer", opacity: pending ? 0.6 : 1 }}>
+                  {pending ? "Envoi…" : "Envoyer ma demande"}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </section>
