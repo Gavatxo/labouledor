@@ -37,6 +37,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "La Boule d'Or Nibelloise" }],
   alternates: { canonical: "/" },
+  icons: {
+    icon: [{ url: "/assets/favicon.png", type: "image/png" }],
+    shortcut: "/assets/favicon.png",
+    apple: "/assets/favicon.png",
+  },
   openGraph: {
     title: "La Boule d'Or Nibelloise — Club de pétanque à Nibelle (45)",
     description: "Club de pétanque de Nibelle (45), dans le Loiret — concours, vie du club et adhésion.",

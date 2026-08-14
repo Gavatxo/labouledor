@@ -42,7 +42,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
           <div style={{ maxWidth: 1240, margin: "0 auto", padding: "0 24px", height: 78, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
             <Link href="/" style={{ display: "flex", alignItems: "center", gap: 12 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/logo.svg" alt={CLUB.fullName} style={{ width: 50, height: 50, objectFit: "contain" }} />
+              <img src="/assets/logo_PETANQUE.jpeg" alt={CLUB.fullName} style={{ height: 54, width: "auto", objectFit: "contain", borderRadius: 8 }} />
               <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.05 }}>
                 <span style={{ fontFamily: "var(--font-heading)", fontSize: 17, color: "var(--gold-lt)", letterSpacing: ".01em" }}>{CLUB.name}</span>
                 <span style={{ fontSize: 10, letterSpacing: ".34em", textTransform: "uppercase", color: "rgba(246,236,217,.5)" }}>{CLUB.place}</span>
@@ -118,7 +118,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
           <div style={{ maxWidth: 1240, margin: "0 auto", padding: "clamp(48px,6vw,80px) 24px 30px", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 38 }}>
             <div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/logo.svg" alt={CLUB.fullName} style={{ width: 96, height: 96, objectFit: "contain", marginBottom: 16 }} />
+              <img src="/assets/logo_PETANQUE.jpeg" alt={CLUB.fullName} style={{ height: 110, width: "auto", objectFit: "contain", marginBottom: 16, borderRadius: 12 }} />
               <p style={{ fontSize: 15, maxWidth: "30ch", margin: 0 }}>Club de pétanque de Nibelle, Loiret. Jeune, convivial, ouvert à tous.</p>
             </div>
             {FOOTER_COLS.map((col) => (
