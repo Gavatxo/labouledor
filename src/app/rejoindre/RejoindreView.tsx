@@ -38,9 +38,9 @@ export default function RejoindreView() {
             <div style={{ marginTop: 30, padding: 24, borderRadius: "var(--radius-lg)", background: "var(--ink)", color: "#f6ecd9", display: "flex", flexWrap: "wrap", gap: 24, alignItems: "center", justifyContent: "space-between" }}>
               <div>
                 <div style={{ fontSize: 12, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(246,236,217,.6)" }}>Licence FFPJP + adhésion</div>
-                <div style={{ fontFamily: "var(--font-heading)", fontSize: 36, color: "var(--gold)" }}>38 € / an</div>
+                <div style={{ fontFamily: "var(--font-heading)", fontSize: 36, color: "var(--gold)" }}>À définir</div>
               </div>
-              <div style={{ fontSize: 14, color: "rgba(246,236,217,.7)", maxWidth: "26ch" }}>Gratuit pour les moins de 16 ans. Entraînements du mardi ouverts à tous, sans licence.</div>
+              <div style={{ fontSize: 14, color: "rgba(246,236,217,.7)", maxWidth: "26ch" }}>Entraînements du mardi ouverts à tous, sans licence.</div>
             </div>
           </div>
 
@@ -91,6 +91,25 @@ export default function RejoindreView() {
                 </button>
               </form>
             )}
+          </div>
+        </div>
+      </section>
+
+      {/* ══ INSCRIPTION LICENCE EN LIGNE (YAPLA) ══ */}
+      <section style={{ background: "var(--ink)", color: "#f6ecd9" }}>
+        <div style={{ maxWidth: 1240, margin: "0 auto", padding: "clamp(44px,6vw,84px) 24px" }}>
+          <div style={{ maxWidth: "60ch", marginBottom: "clamp(24px,3vw,40px)" }}>
+            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: ".2em", textTransform: "uppercase", color: "var(--gold)" }}>Inscription licence en ligne</span>
+            <h2 style={{ fontSize: "clamp(28px,3.4vw,44px)", color: "#f6ecd9", margin: "14px 0 12px" }}>Prends ou renouvelle ta licence</h2>
+            <p style={{ fontSize: 17, color: "rgba(246,236,217,.72)", margin: 0 }}>Déjà décidé ? Inscris-toi directement via notre espace membres sécurisé, sans attendre qu&apos;on te rappelle.</p>
+          </div>
+          <div style={{ borderRadius: "var(--radius-lg)", overflow: "hidden", background: "#fff", boxShadow: "var(--shadow-md)" }}>
+            <iframe
+              title="Inscription licence — Espace membres La Boule d'Or Nibelloise"
+              src="https://la-boule-d-or-nibelloise.s2.yapla.com/fr/espace-membres"
+              style={{ display: "block", width: "100%", height: 750, border: 0 }}
+              loading="lazy"
+            />
           </div>
         </div>
       </section>
