@@ -95,7 +95,8 @@ export default function RejoindreView() {
         </div>
       </section>
 
-      {/* ══ INSCRIPTION LICENCE EN LIGNE (YAPLA) ══ */}
+      {/* ══ INSCRIPTION LICENCE EN LIGNE (YAPLA) — désactivée tant que le montant de la licence n'est pas défini ══ */}
+      {/*
       <section style={{ background: "var(--ink)", color: "#f6ecd9" }}>
         <div style={{ maxWidth: 1240, margin: "0 auto", padding: "clamp(44px,6vw,84px) 24px" }}>
           <div style={{ maxWidth: "60ch", marginBottom: "clamp(24px,3vw,40px)" }}>
@@ -113,6 +114,7 @@ export default function RejoindreView() {
           </div>
         </div>
       </section>
+      */}
     </main>
   );
 }
