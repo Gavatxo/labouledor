@@ -72,7 +72,6 @@ const jsonLd = {
   foundingDate: CLUB.foundedYear,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Rue du Stade",
     addressLocality: "Nibelle",
     postalCode: "45340",
     addressRegion: "Loiret",

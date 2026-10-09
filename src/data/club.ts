@@ -18,7 +18,7 @@ export const CLUB = {
   foundedYear: "2026",
   email: "contact@labouledornibelloise.fr",
   phone: "06 00 00 00 00",
-  address: "Boulodrome de Nibelle — Rue du Stade, 45340 Nibelle",
+  address: "45340 Nibelle",
 } as const;
 
 export const IMAGES = {
@@ -165,7 +165,7 @@ export const GALLERY: Photo[] = [
 ];
 
 export const INFOS = [
-  { label: "Adresse", value: "Boulodrome de Nibelle — Rue du Stade, 45340 Nibelle" },
+  { label: "Adresse", value: "45340 Nibelle" },
   { label: "Accès & parking", value: "Parking gratuit devant le terrain, 40 places. Accessible à pied depuis la place du village." },
   { label: "Horaires", value: "Entraînement libre le mardi à partir de 18h · Concours les samedis annoncés" },
   { label: "Contact", value: "contact@labouledornibelloise.fr · 06 00 00 00 00" },

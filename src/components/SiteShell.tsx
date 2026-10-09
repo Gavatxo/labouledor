@@ -133,7 +133,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
             ))}
             <div>
               <div style={{ fontFamily: "var(--font-heading)", fontSize: 16, color: "var(--gold)", marginBottom: 14 }}>Le terrain</div>
-              <p style={{ fontSize: 15, margin: "0 0 14px" }}>Boulodrome de Nibelle<br />Rue du Stade, 45340 Nibelle</p>
+              <p style={{ fontSize: 15, margin: "0 0 14px" }}>45340 Nibelle</p>
               <div style={{ display: "flex", gap: 10 }}>
                 <a href="#" aria-label="Instagram" className="social-btn" style={{ width: 42, height: 42, borderRadius: 999, border: "1px solid rgba(212,164,55,.35)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--gold-lt)" }}>
                   <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.75" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="6" /><circle cx="12" cy="12" r="4.2" /><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" /></svg>
